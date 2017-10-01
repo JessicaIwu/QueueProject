@@ -17,6 +17,8 @@ class HomeController extends Controller
     		'name' => $request->name
     	];
         $this->dispatch(new SendEmail($mail));
+
+        return redirect()->route('send');
     }
 
      public function send(){

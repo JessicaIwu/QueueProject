@@ -3,10 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Queue;
-use Illuminate\Queue\Events\JobProcessed;
-use Illuminate\Queue\Events\JobProcessing;
-use App\Log;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,23 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Queue::before(function (JobProcessing $event) {
-            $log = new Log();
-            $log->connection_name = $event->connectionName;
-            $log->job = 'SendEmail';
-            $log->payload = 'empty(var)';
-            $log->satus = 'before';
-            $log->save();
-        });
-
-        Queue::after(function (JobProcessed $event) {
-        $log = new Log();
-            $log->connection_name = $event->connectionName;
-            $log->job = 'SendEmail';
-            $log->payload ='empty';
-            $log->satus = 'after';
-            $log->save();
-        });
+        Schema::defaultStringLength(191);
     }
 
 
