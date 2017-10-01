@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/send', 'HomeController@send');
+Route::get('/send', 'HomeController@send')->name('send');
 Route::post('/send', 'HomeController@receiveEmail')->name('receive');
 
 // Route::get('/broadcast', function() {
